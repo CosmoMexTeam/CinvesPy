@@ -1,0 +1,18 @@
+name: cinvespyenv
+channels:
+- defaults
+dependencies:
+- cython
+- h5py
+- ipython
+- jupyter
+- notebook
+- numpy
+- pandas
+- pip
+- pyqt
+- python=3.6
+- qt
+- qtconsole
+- scipy
+- seaborn
