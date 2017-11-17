@@ -78,5 +78,5 @@ dependencies:
   - jupyter-console==5.2.0
   - jupyter-core==4.3.0
   - prompt-toolkit==1.0.15
-prefix: /anaconda/envs/cinvespydev
+#prefix: /anaconda/envs/cinvespyenv
 
