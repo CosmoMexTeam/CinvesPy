@@ -26,12 +26,11 @@ logger.setLevel(logging.INFO)
 
 
 def sleep_message_kernel(sleep_time):
-    """Displays a message showing the current process and the
-    item passed as argument.
+    """Displays a message showing the current process and how much
+     time the process is going to be suspended.
 
-    :param lock:
-    :param sleep_time:
-    :return:
+    :param sleep_time: Time to suspend the execution
+    :return: A message.
     """
     pid = current_process().name
 
@@ -84,8 +83,9 @@ def rand_string_kernel(length):
 
 
 def parallel_exec(kernel, data_grid, processes=None):
-    """Executes the function over a multiprocessing-lecture ``Pool``
-     over the ``data_grid``.
+    """Executes the function ``kernel`` using a pool of processes
+     using a multiprocessing ``Pool``, over the data stored in
+     ``data_grid``.
 
     :param kernel:
     :param data_grid:
@@ -97,17 +97,20 @@ def parallel_exec(kernel, data_grid, processes=None):
 
     exec_results = []
     pool = Pool(processes=processes, initializer=init_, initargs=(lock_,))
-    with pool:
-        enum_imap = pool.imap(kernel, data_grid)
-        for result in enum_imap:
-            exec_results.append(result)
+    pool_imap = pool.imap(kernel, data_grid)
+    for result in pool_imap:
+        exec_results.append(result)
+
+    pool.close()
+    pool.terminate()
 
     return exec_results
 
 
 def init_(lock_):
-    """Initializer for the multiprocessing Pool. Used to make a lock
-    available for all the processes as a global variable.
+    """Initializer for the multiprocessing ``Pool``. It is used to make
+    a ``Lock`` instance available for all the processes as a global
+    variable.
 
     :param lock_: A logger.
     :return:
