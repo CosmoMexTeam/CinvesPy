@@ -81,5 +81,5 @@ def exec_chi2():
     print(chi2_data.shape)
 
 
-    if __name__ == '__main__':
+if __name__ == '__main__':
     exec_chi2()
